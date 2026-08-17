@@ -39,7 +39,7 @@ unmodified.
 
 ## Device policy
 
-`hrm_gear.runtime.pick_device()` prefers MPS, then CPU. Smoke harnesses
+`hrm_gear.runtime.pick_device()` prefers CUDA, then MPS, then CPU. Smoke harnesses
 attempt MPS, catch SDPA/device failures, and retry on CPU. `empty_carry`
 allocates on CPU; `move_carry` places `z_H` / `z_L` on the compute device.
 
@@ -67,6 +67,7 @@ python scripts/smoke_test_all.py
 
 See [experiments.md](experiments.md).
 
-The M4 stops here. Adaptation uses Twin-T4 harvest on Kaggle
-**GPU T4 x2** (2 × NVIDIA Tesla T4), pack / run / harvest / kill, inside
-the weekly free quota. See [compute.md](compute.md).
+The M4 stops here. Adaptation uses Twin-T4 harvest on **Kaggle**
+**GPU T4 x2** (2 × NVIDIA Tesla T4): pack → spin → run → harvest →
+kill. ~30 GPU hours/week, phone-verified, no leftover VM. See
+[compute.md](compute.md).

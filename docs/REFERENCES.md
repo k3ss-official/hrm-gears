@@ -109,9 +109,14 @@ Sudoku-Extreme and Maze-30x30-Hard source CSVs live on Hugging Face under
 - Hugging Face Hub — checkpoint transport.
 - Hydra / OmegaConf — upstream experiment config.
 - wandb — upstream training logs (optional here).
-- Kaggle Notebooks — **GPU T4 x2** (2 × NVIDIA Tesla T4) for Twin-T4 harvest.
-  Free GPU time is a **weekly** quota (historically ~30 h/week), with
-  per-session caps. Not a dedicated box. See [compute.md](compute.md).
+- **Kaggle** Notebooks — **GPU T4 x2** (2 × NVIDIA Tesla T4) for Twin-T4
+  harvest. Hat tip: the free dual-T4 product is why this repo does not
+  rent idle silicon. ~30 GPU hours/week after phone verification, no
+  credit card. Session dies; artifacts are what we keep.
+  <https://www.kaggle.com/docs/notebooks>
+  <https://www.kaggle.com/product-feedback/361104>
+  <https://www.kaggle.com/general/108481>
+  See [compute.md](compute.md).
 
 ## Related routing literature (context only)
 

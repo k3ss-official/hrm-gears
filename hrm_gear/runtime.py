@@ -26,6 +26,8 @@ from models.hrm.hrm_act_v1 import HierarchicalReasoningModel_ACTV1
 
 
 def pick_device() -> torch.device:
+    if torch.cuda.is_available():
+        return torch.device("cuda")
     if torch.backends.mps.is_available():
         return torch.device("mps")
     return torch.device("cpu")

@@ -1,0 +1,15 @@
+{
+  "id": "REPLACE_ME/hrm-gear-twin-t4",
+  "title": "hrm-gear Twin-T4 harvest",
+  "code_file": "twin_t4.ipynb",
+  "language": "python",
+  "kernel_type": "notebook",
+  "is_private": true,
+  "enable_gpu": true,
+  "enable_internet": true,
+  "keywords": ["gpu", "pytorch", "hrm"],
+  "dataset_sources": [],
+  "kernel_sources": [],
+  "competition_sources": [],
+  "model_sources": []
+}

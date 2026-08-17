@@ -7,6 +7,9 @@
 # data
 /data/
 
+# Twin-T4 harvest scratch (packs + pulled artifacts)
+/var/
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
