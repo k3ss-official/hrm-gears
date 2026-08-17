@@ -82,9 +82,7 @@ tiers:
 
 capability_axes:
   - reasoning_depth   # shallow | medium | deep | architectural
-  - tool_intensity    # none | light | heavy | multi-tool
+  - tool_use          # none | light | heavy   (v1 JSONL key; not tool_intensity)
   - domain            # code | research | synthesis | vision | structured
   - context_pressure  # short | long | full-history
   - stakes            # low | medium | high
-  - latency_budget
-  - error_tolerance
