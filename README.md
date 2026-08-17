@@ -7,7 +7,7 @@ recurrent network with an ACT halt head. We are measuring whether that
 architecture can sit in front of a tool-using agent harness and pick the
 lowest-cost model that can still do the subtask.
 
-The first consumer is **Hermes** (Nous Research). The interface is a
+The first consumer is **Hermes** ([@NousResearch](https://x.com/NousResearch)). The interface is a
 capability matrix plus a discrete choice — any harness that can annotate a
 subtask and honour a model id can point at the same unit. Hermes is the
 design centre, not a hard dependency.
@@ -28,7 +28,7 @@ Apple-Silicon runtime, inference harnesses, and a routing contract.
 rider  = Hermes orchestrator
 bike   = the agent harness
 gears  = vendor models (free → frontier API)
-derailleur = HRM (candidate)
+derailleur  = HRM driven(candidate)
 ```
 
 Repo: [`k3ss-official/hrm-gears`](https://github.com/k3ss-official/hrm-gears).
@@ -170,7 +170,7 @@ are **not** stored in git.
 
 ## Thanks
 
-Nous Research, and [@Teknium](https://x.com/Teknium1) in particular —
+[@NousResearch](https://x.com/NousResearch), and [@Teknium](https://x.com/Teknium1) in particular —
 Hermes is why this router exists. The first install target is a Hermes
 harness; the contract is harness-agnostic on purpose.
 
