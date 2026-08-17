@@ -12,6 +12,10 @@ Hermes (Nous Research) is the design-centre install. Nothing in the
 matrix or the planned head is Hermes-specific. Any harness that can tag a
 subtask and switch model id can sit on the same unit.
 
+The logic does not have to be comprehensive. A subtask arrives with
+tags. A trained parameterisation of the matrix allots it to a model id.
+Escalate if confidence is low. That is supervision, not composition.
+
 This is not prestige routing. The hard rule, locked by the project owner:
 
 > When several models satisfy the required tags, pick the highest-priority

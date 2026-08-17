@@ -39,6 +39,22 @@ re-implementation and not a claim of authorship.
 The original project README is preserved at
 [upstream/HRM.README.md](upstream/HRM.README.md).
 
+## Surveyed, not chosen as the router
+
+Inception Labs (Khanna, Kharbanda, Li, Varma, Wang, et al.).
+**Mercury: Ultra-Fast Language Models Based on Diffusion.**
+arXiv:2506.17298, 2025.
+<https://arxiv.org/abs/2506.17298>
+<https://www.inceptionlabs.ai/>
+
+Mercury / Mercury 2 is a diffusion LLM: non-autoregressive generation,
+Transformer-parameterised denoiser. Looked at as a non-standard LM.
+Rejected as the *router* because it still generates language; the job
+here is allotment. It remains a candidate **gear** in the matrix.
+
+Tiny Recursive Models (TRM) — recursive refinement in the same
+neighbourhood as HRM. Noted, not the unit in this tree.
+
 ## Adaptive Computation Time
 
 Alex Graves.

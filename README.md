@@ -12,6 +12,13 @@ capability matrix plus a discrete choice — any harness that can annotate a
 subtask and honour a model id can point at the same unit. Hermes is the
 design centre, not a hard dependency.
 
+Pre-work was a survey of non-AR / non-standard models, including Inception
+**Mercury 2** (diffusion LM — a gear, not a supervisor) and TRM. HRM is
+the line known longest: dual timescale plus an ACT halt head already
+looks like a monitor that *allots* work. Routing is allocation under
+trained parameters, not an essay. See
+[`docs/architecture.md`](docs/architecture.md#pre-work).
+
 The original research code, paper, and checkpoints are **Sapient Intelligence's**.
 They are cited in [`NOTICE`](NOTICE) and [`docs/REFERENCES.md`](docs/REFERENCES.md).
 This repository is an Apache-2.0 derivative: their tree, plus a documented

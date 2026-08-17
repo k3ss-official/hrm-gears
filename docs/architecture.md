@@ -14,6 +14,38 @@ Credit for the architecture, the training recipe, and the published
 checkpoints belongs to the authors listed in [REFERENCES.md](REFERENCES.md).
 What follows is a reading of *their* system, plus the mapping we are testing.
 
+## Pre-work
+
+This repo did not start from "find a small Transformer". The owner had
+already looked at several **non-autoregressive / non-standard** lines
+before settling here.
+
+**Mercury 2 (Inception Labs)** is a commercial-scale **diffusion language
+model** (Khanna et al., 2025). Generation is iterative denoising, not
+left-to-right next-token. Fast, and genuinely not autoregressive. It is
+still a *language model*: it emits text. The published Mercury write-up
+parameterises the denoiser with Transformer blocks. Useful as a **gear**.
+The wrong *kind* of machine for the **derailleur**. A router that writes
+essays in order to pick a model is the failure mode we are leaving.
+
+**TRM (Tiny Recursive Models)** sits in the same recursive-refinement
+neighbourhood as HRM. Still interesting. Not the unit we have lived with.
+
+**HRM** is the one known longest. Its *core loop* already behaves like a
+supervisor / monitor / floor-manager:
+
+- `z_H` holds a slow plan.
+- `z_L` burns inner steps on the current allocation.
+- The ACT Q-head (`q_halt` / `q_continue`) is already a monitor:
+  enough compute, or another cycle?
+
+That is orchestrator-shaped behaviour without a transcript. Routing is
+not comprehensive reasoning. It is **allotment**: given a tagged subtask
+and a trained parameterisation of the matrix, send this job there. The
+decision does not need to be wide. It needs to be cheap, repeatable, and
+wrong in a way we can escalate. A 27M hierarchical recurrent net with a
+halt head is the right size of brain for that. A diffusion LM is not.
+
 ## Why a non-Transformer
 
 A Transformer decoder generates by attending over a growing token sequence.
