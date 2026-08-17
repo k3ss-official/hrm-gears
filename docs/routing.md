@@ -2,11 +2,15 @@
 
 ## Job
 
-Hermes is the rider. The harness is the bicycle. Published LLMs are the
-gears. HRM is being evaluated as the **derailleur**: a local, 27M,
+Hermes is the first rider. The harness is the bicycle. Published LLMs are
+the gears. HRM is being evaluated as the **derailleur**: a local, 27M,
 hierarchical decision engine that, given a subtask annotation and
 `config/model_matrix.v1.yaml`, returns the cheapest model that can still
 do the work.
+
+Hermes (Nous Research) is the design-centre install. Nothing in the
+matrix or the planned head is Hermes-specific. Any harness that can tag a
+subtask and switch model id can sit on the same unit.
 
 This is not prestige routing. The hard rule, locked by the project owner:
 

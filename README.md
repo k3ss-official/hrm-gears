@@ -4,8 +4,13 @@
 
 This is not a Transformer project. HRM (Wang et al., 2025) is a dual-timescale
 recurrent network with an ACT halt head. We are measuring whether that
-architecture can sit inside a Hermes-style orchestrator and pick the lowest-cost
-model that can still do the subtask.
+architecture can sit in front of a tool-using agent harness and pick the
+lowest-cost model that can still do the subtask.
+
+The first consumer is **Hermes** (Nous Research). The interface is a
+capability matrix plus a discrete choice — any harness that can annotate a
+subtask and honour a model id can point at the same unit. Hermes is the
+design centre, not a hard dependency.
 
 The original research code, paper, and checkpoints are **Sapient Intelligence's**.
 They are cited in [`NOTICE`](NOTICE) and [`docs/REFERENCES.md`](docs/REFERENCES.md).
@@ -21,15 +26,20 @@ derailleur = HRM (candidate)
 
 ## Status
 
+Local cursory tests of the published weights, M4 / MPS / SDPA shim.
+Not paper-task leaderboards. Load + ACT forward + in-vocab outputs.
+
 | Item | State |
 | --- | --- |
 | Fresh clone of `sapientinc/HRM` | done |
 | MPS env + SDPA FlashAttention stand-in | done |
-| Strict load of Sudoku / Maze / ARC-2 weights | done |
-| ACT smoke tests (16-step vs experimental early-exit) | done |
-| Routing head / training data / Kaggle run | **not started** |
+| Strict load — Sudoku / Maze / ARC-2 | **PASS** |
+| ACT smoke, 16-step (Sudoku) | **PASS** (Q-head would halt at step 2) |
+| ACT smoke, Maze + ARC-2, 16-step vs early-exit | **PASS** (Q-head did not cross on constructed boards) |
+| Routing head / traces / Twin-T4 harvest | **not started** |
 
-Measured, not hoped: see [`docs/experiments.md`](docs/experiments.md).
+Numbers: [`docs/experiments.md`](docs/experiments.md).
+Burst-GPU plan: [`docs/compute.md`](docs/compute.md).
 
 ## Architecture in one page
 
@@ -56,13 +66,19 @@ CUDA + FlashAttention reproduction of the *paper* follows the upstream
 README at [`docs/upstream/HRM.README.md`](docs/upstream/HRM.README.md).
 Do not mix those numbers with SDPA/MPS runs.
 
+Adaptation does **not** stay on the M4. The M4 is the smoke bench. Training
+uses **Twin-T4 harvest**: pack the run, spin a Kaggle **GPU T4 x2** session
+(2 × NVIDIA Tesla T4), train, pull artifacts, kill the VM. Weekly free
+quota is on the order of 30 GPU hours — a burst, not a lease. Details in
+[`docs/compute.md`](docs/compute.md).
+
 ## Layout
 
 ```
 hrm_gear/                 our runtime (load, ACT, token schemes, SDPA shim)
 scripts/                  bootstrap, checkpoint fetch, smokes
 config/model_matrix.v1.yaml
-docs/                     architecture, environment, experiments, routing
+docs/                     architecture, environment, experiments, routing, compute
 models/  pretrain.py …    unmodified upstream HRM (Wang et al., 2025)
 ```
 
@@ -73,6 +89,13 @@ See `LICENSE` and `NOTICE`. Checkpoints are fetched from Hugging Face and
 are **not** stored in git.
 
 ## Thanks
+
+Nous Research, and [@Teknium](https://x.com/Teknium1) in particular —
+Hermes is why this router exists. The first install target is a Hermes
+harness; the contract is harness-agnostic on purpose.
+
+[@tonysimmons_](https://x.com/tonysimmons_) — for getting this off the
+whiteboard and onto a disk.
 
 Sapient Intelligence — for publishing a 27M hierarchical reasoner instead
 of another 7B Transformer. Graves (2016) for ACT. Chollet / ARC Prize /

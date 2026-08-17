@@ -2,6 +2,19 @@
 
 This project sits on other people's work. That is the point.
 
+## Hermes / why this repo exists
+
+Nous Research — [Hermes](https://nousresearch.com), the agent harness this
+router is being built to serve first. The routing contract is a matrix plus
+a model id; any harness that can honour that can consume the same unit.
+
+[@Teknium](https://x.com/Teknium1) (Andy Keh) — hat tip. Hermes, OpenHermes,
+and the culture of actually shipping local agents are the reason this is
+not another abstract router paper.
+
+[@tonysimmons_](https://x.com/tonysimmons_) — for kicking the project from
+talk into a tree on disk.
+
 ## Primary — Hierarchical Reasoning Model
 
 Guan Wang, Jin Li, Yuhao Sun, Xing Chen, Changling Liu, Yue Wu, Meng Lu,
@@ -72,6 +85,9 @@ Sudoku-Extreme and Maze-30x30-Hard source CSVs live on Hugging Face under
 - Hugging Face Hub — checkpoint transport.
 - Hydra / OmegaConf — upstream experiment config.
 - wandb — upstream training logs (optional here).
+- Kaggle Notebooks — **GPU T4 x2** (2 × NVIDIA Tesla T4) for Twin-T4 harvest.
+  Free GPU time is a **weekly** quota (historically ~30 h/week), with
+  per-session caps. Not a dedicated box. See [compute.md](compute.md).
 
 ## Related routing literature (context only)
 

@@ -66,3 +66,7 @@ python scripts/smoke_test_all.py
 ```
 
 See [experiments.md](experiments.md).
+
+The M4 stops here. Adaptation uses Twin-T4 harvest on Kaggle
+**GPU T4 x2** (2 × NVIDIA Tesla T4), pack / run / harvest / kill, inside
+the weekly free quota. See [compute.md](compute.md).
