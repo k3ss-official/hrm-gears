@@ -1,0 +1,79 @@
+# hrm-gear model capability matrix v1.0
+#
+# The router exists to put every subtask on the cheapest model that can
+# still do the job. Tiers are strictly ordered. Within a tier, prefer
+# the cheaper / faster option. This file is the contract for synthetic
+# training-data generation; it is not yet consumed by a trained head.
+#
+# Sources locked by the project owner. IDs are stable.
+
+version: "1.0"
+rule: "lowest-viable-tier-wins"
+
+tiers:
+  1:
+    name: free
+    models:
+      - id: free-opencode-zen
+        source: OpenCode Zen
+        notes: Primary free lane
+      - id: free-openrouter
+        source: OpenRouter
+        notes: Rotating $0 pool
+      - id: free-nous
+        source: Nous Portal
+        notes: Temporary free windows
+  2:
+    name: non-frontier-subscription
+    models:
+      - id: nous-deepseek
+        source: Nous Portal
+        notes: Cheap reasoning
+      - id: nous-nemotron
+        source: Nous Portal
+        notes: Coding / general
+      - id: nous-qwen
+        source: Nous Portal
+        notes: Qwen3-class
+      - id: openai-nonfrontier
+        source: OpenAI OAuth
+        notes: Mini / non-Sol class
+  3:
+    name: frontier-subscription
+    models:
+      - id: openai-gpt-sol
+        source: OpenAI OAuth
+        notes: High-end reasoning
+      - id: nous-fable5
+        source: Nous Portal
+        notes: Agentic
+      - id: nous-gemini
+        source: Nous Portal
+        notes: Long context / multimodal
+      - id: grok-build-46
+        source: local Grok Build CLI
+        notes: Grok 4.6 on the M4; long-running agent, 500k context
+  4:
+    name: non-frontier-api
+    models:
+      - id: openrouter-mid
+        source: OpenRouter
+      - id: nvidia-nemotron
+        source: Nvidia API
+  5:
+    name: frontier-api
+    models:
+      - id: openrouter-frontier
+        source: OpenRouter
+        notes: Last resort
+      - id: nvidia-frontier
+        source: Nvidia API
+
+capability_axes:
+  - reasoning_depth   # shallow | medium | deep | architectural
+  - tool_intensity    # none | light | heavy | multi-tool
+  - domain            # code | research | synthesis | vision | structured
+  - context_pressure  # short | long | full-history
+  - stakes            # low | medium | high
+  - latency_budget
+  - error_tolerance
