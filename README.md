@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="assets/hrm-gears-banner.jpg" alt="hrm-gears — Hermes-first cost router, HRM driven" width="100%">
+</p>
+
 # hrm-gears
 
 **Adapt Sapient's 27M Hierarchical Reasoning Model into a local, cheapest-viable model router.**
@@ -160,6 +164,7 @@ Full reading: [`docs/architecture.md`](docs/architecture.md).
 
 ```
 ./setup                   Door 1 — probe, venv, fetch, smokes
+assets/                   README banner
 hrm_gear/                 runtime (load, ACT, token schemes, SDPA shim)
 scripts/                  bootstrap, checkpoint fetch, smokes, setup
 config/model_matrix.v1.yaml
