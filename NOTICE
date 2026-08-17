@@ -1,9 +1,9 @@
-hrm-gear
+hrm-gears
 Copyright 2026 Tony Whelan (k3ss-official)
 
-Built to sit in front of Hermes (Nous Research) first; the routing
-contract is harness-agnostic. Hat tip: Nous Research, @Teknium,
-@tonysimmons_.
+Built to sit in front of Hermes (@NousResearch) first; the routing
+contract is harness-agnostic. Hat tip: @NousResearch, @Teknium,
+@tonysimmons_. Import name remains hrm_gear.
 
 This product includes software developed by Sapient Intelligence
 and contributors of the Hierarchical Reasoning Model (HRM) project.

@@ -4,9 +4,10 @@ This project sits on other people's work. That is the point.
 
 ## Hermes / why this repo exists
 
-Nous Research — [Hermes](https://nousresearch.com), the agent harness this
-router is being built to serve first. The routing contract is a matrix plus
-a model id; any harness that can honour that can consume the same unit.
+[@NousResearch](https://x.com/NousResearch) — [Hermes](https://nousresearch.com),
+the agent harness this router is being built to serve first. The routing
+contract is a matrix plus a model id; any harness that can honour that can
+consume the same unit.
 
 [@Teknium](https://x.com/Teknium1) (Andy Keh) — hat tip. Hermes, OpenHermes,
 and the culture of actually shipping local agents are the reason this is
@@ -33,7 +34,7 @@ Checkpoints (used, not redistributed):
 
 Thank you to the Sapient Intelligence authors and contributors for
 releasing a 27M non-Transformer reasoner with weights, data builders, and
-an honest training recipe. hrm-gear is an adaptation layer, not a
+an honest training recipe. hrm-gears is an adaptation layer, not a
 re-implementation and not a claim of authorship.
 
 The original project README is preserved at

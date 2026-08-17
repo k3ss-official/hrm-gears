@@ -7,6 +7,10 @@ strictly, does the ACT loop run on MPS, and does the Q-head ever fire?
 Device: M4 Mac mini, PyTorch 2.13.0 MPS, SDPA shim. bfloat16 forward dtype
 as in `HierarchicalReasoningModel_ACTV1Config.forward_dtype`.
 
+Tables below are the first recorded M4 smokes. A later `./setup` warm
+run was Sudoku ~0.39 s / 463 MiB and ARC-2 ~1.75 s / ~2.9 GiB. Treat
+latencies as order-of-magnitude, not a leaderboard.
+
 ## Strict load
 
 | Checkpoint | vocab | seq | puzzle IDs | params | result |

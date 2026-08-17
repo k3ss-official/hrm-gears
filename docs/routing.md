@@ -8,7 +8,7 @@ hierarchical decision engine that, given a subtask annotation and
 `config/model_matrix.v1.yaml`, returns the cheapest model that can still
 do the work.
 
-Hermes (Nous Research) is the design-centre install. Nothing in the
+Hermes ([@NousResearch](https://x.com/NousResearch)) is the design-centre install. Nothing in the
 matrix or the planned head is Hermes-specific. Any harness that can tag a
 subtask and switch model id can sit on the same unit.
 
@@ -43,8 +43,9 @@ Limitations we are not hand-waving:
 Input (to be packed into the HRM sequence later):
 
 - subtask text or a frozen embedding of it
-- capability tags (`reasoning_depth`, `tool_intensity`, `domain`,
-  `context_pressure`, `stakes`, `latency_budget`)
+- capability tags (`reasoning_depth`, `tool_use`, `domain`,
+  `context_pressure`, `stakes`) — v1 JSONL key is `tool_use`, not
+  `tool_intensity`
 - snapshot of the matrix (tier, cost, windows, hard constraints)
 - session signals (remaining budget, last failure)
 

@@ -5,7 +5,7 @@
 This is not a Transformer. It is not a distilled LLM. It is not chain-of-thought
 with a smaller context window.
 
-hrm-gear adapts Sapient Intelligence's **Hierarchical Reasoning Model**
+hrm-gears adapts Sapient Intelligence's **Hierarchical Reasoning Model**
 (Wang et al., 2025) — a 27-million-parameter **dual-timescale recurrent**
 network with an Adaptive Computation Time (ACT) wrapper — into a candidate
 **discrete router** for a Hermes-style orchestrator.
@@ -120,7 +120,7 @@ The outer class `HierarchicalReasoningModel_ACTV1` is an ACT wrapper
 - **Evaluation always runs `halt_max_steps` (16).** The comparison is
   recorded but does not stop the loop.
 
-hrm-gear therefore reports two inference policies:
+hrm-gears therefore reports two inference policies:
 
 | Policy | Behaviour | Status |
 | --- | --- | --- |

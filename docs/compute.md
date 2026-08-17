@@ -128,10 +128,14 @@ outputs. Details in [experiments.md](experiments.md).
 | --- | --- |
 | Sudoku-extreme weights, 16-step ACT | **PASS** |
 | Maze-30x30-hard weights, 16-step vs early-exit | **PASS** (Q-head never crossed on the constructed board) |
-| ARC-2 weights, 16-step vs early-exit | **PASS** (same; RSS ~3.5 GiB from the puzzle-ID table) |
+| ARC-2 weights, 16-step vs early-exit | **PASS** (same; RSS ~3 GiB from the puzzle-ID table) |
 
 No Twin-T4 harvest has been pulled yet. The next number that matters is
 a `harvest/MANIFEST.json` with `t4_x2_seen: true`.
+
+**BLOCKED on this M4:** `~/.kaggle/kaggle.json` is not present, so
+`scripts/kaggle/harvest.py` cannot pull Output. Pack + notebook import
+still work. Do not invent a live harvest without the API token.
 
 ## What this path will not do
 
@@ -140,9 +144,10 @@ a `harvest/MANIFEST.json` with `t4_x2_seen: true`.
 - Keep a GPU warm between runs.
 - Treat Colab as primary (overflow only; quota is less predictable).
 - Use Oracle Always Free (ARM/CPU, out).
-- Fight the M4 install path. Bring-up stays
-  `./scripts/bootstrap_env.sh`. The optional CUDA Docker skeleton is
-  `scripts/kaggle/Dockerfile` and is **not** the install hero.
+- Fight the M4 install path. Bring-up is Door 1 `./setup` (Door 2 is
+  the unwrapped `./scripts/bootstrap_env.sh`). The optional CUDA Docker
+  skeleton is `scripts/kaggle/Dockerfile` and is **not** Door 3
+  (`docker compose run --rm setup`).
 
 ## Optional CUDA Docker (not Kaggle, not M4)
 

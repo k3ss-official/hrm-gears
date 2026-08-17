@@ -1,4 +1,4 @@
-"""hrm-gear: adapt Sapient HRM into a local model-routing brain.
+"""hrm-gears (import hrm_gear): adapt Sapient HRM into a local model-routing brain.
 
 The 27M Hierarchical Reasoning Model is not a Transformer. This package
 does not reimplement it. It loads the published weights, runs ACT on

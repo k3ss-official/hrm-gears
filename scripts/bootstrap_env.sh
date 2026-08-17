@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Bootstrap the Apple-Silicon inference environment for hrm-gear.
+# Bootstrap the Apple-Silicon inference environment for hrm-gears.
 #
 # Upstream HRM (Wang et al., 2025) requires CUDA 12.x + FlashAttention.
 # This script does *not* install those. It installs PyTorch MPS, the
