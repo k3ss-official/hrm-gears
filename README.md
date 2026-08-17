@@ -90,7 +90,7 @@ GPU pack / harvest is **not** this image:
 
 | | **MVP (this tree, now)** | **Stage 2 (not this PR)** |
 | --- | --- | --- |
-| What ships | Load published 27M weights on M4. `./setup`. Frozen vendor matrix. Sudoku + Maze + ARC-2 smokes. | Routing classification head. Experience flywheel. Twin-T4 harvest training. Daily model-intel scrape. |
+| What ships | Load published 27M weights. `./setup` (and Door 3). Frozen vendor matrix. Sudoku + Maze + ARC-2 smokes. Synthetic allotment JSONL at [`data/routing/v1/`](data/routing/v1/). | Routing classification head. Experience flywheel. Twin-T4 *training* harvest. Daily model-intel scrape. Live Hermes traces. |
 | Matrix | Hard-coded snapshot. Manual refresh. | Re-rank from live catalogs; infrequent retrain. |
 | Training | **Not started. Do not implement.** | Supervised bootstrap on synthetic + Hermes traces, then continual log→update with a held-out suite. |
 | Daily scrape | **Out of scope.** | Lightweight freshness, then closed loop. |
@@ -145,8 +145,11 @@ Not paper-task leaderboards. Load + ACT forward + in-vocab outputs.
 | Strict load — Sudoku / Maze / ARC-2 | **PASS** |
 | ACT smoke, 16-step (Sudoku) | **PASS** (Q-head would halt at step 2) |
 | ACT smoke, Maze + ARC-2, 16-step vs early-exit | **PASS** (Q-head did not cross on constructed boards) |
-| `./setup` entrypoint | **this change** |
-| Routing head / traces / Twin-T4 harvest | **Stage 2 — not started** |
+| `./setup` entrypoint | **done** |
+| Door 3 CPU `docker compose run --rm setup` | **done** |
+| Synthetic routing JSONL `data/routing/v1/` | **done** (`outcome` is null; no live traces) |
+| Routing classification head | **Stage 2 — not started** |
+| Twin-T4 harvest pull | **not started** (needs Kaggle API token; see `docs/compute.md`) |
 
 Numbers: [`docs/experiments.md`](docs/experiments.md).
 Burst-GPU plan: [`docs/compute.md`](docs/compute.md).
@@ -164,9 +167,12 @@ Full reading: [`docs/architecture.md`](docs/architecture.md).
 
 ```
 ./setup                   Door 1 — probe, venv, fetch, smokes
-assets/                   README banner
-hrm_gear/                 runtime (load, ACT, token schemes, SDPA shim)
-scripts/                  bootstrap, checkpoint fetch, smokes, setup
+Dockerfile  compose.yaml  Door 3 — CPU one-shot
+assets/hrm-gears-banner.jpg
+hrm_gear/                 runtime (import name; display repo is hrm-gears)
+scripts/                  bootstrap, fetch, smokes, setup
+scripts/kaggle/           Twin-T4 pack / harvest (not Door 3)
+data/routing/v1/          synthetic allotment JSONL
 config/model_matrix.v1.yaml
 docs/                     architecture, environment, experiments, routing, compute
 models/  pretrain.py …    unmodified upstream HRM (Wang et al., 2025)
