@@ -28,7 +28,7 @@ Apple-Silicon runtime, inference harnesses, and a routing contract.
 rider  = Hermes orchestrator
 bike   = the agent harness
 gears  = vendor models (free → frontier API)
-derailleur = HRM (candidate)
+derailleur = HRM driven(candidate)
 ```
 
 ## Status
