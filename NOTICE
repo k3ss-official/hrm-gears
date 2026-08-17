@@ -1,0 +1,53 @@
+hrm-gear
+Copyright 2026 Tony Whelan (k3ss-official)
+
+This product includes software developed by Sapient Intelligence
+and contributors of the Hierarchical Reasoning Model (HRM) project.
+
+========================================================================
+Hierarchical Reasoning Model (HRM)
+========================================================================
+
+This repository is derived from:
+
+    https://github.com/sapientinc/HRM
+
+Copyright of the original HRM source, configuration, assets, and
+training/evaluation entry points remains with the original authors
+and contributors. That code is licensed under the Apache License,
+Version 2.0. A copy of the Apache License is in LICENSE.
+
+Paper:
+
+    Guan Wang, Jin Li, Yuhao Sun, Xing Chen, Changling Liu, Yue Wu,
+    Meng Lu, Sen Song, and Yasin Abbasi Yadkori.
+    Hierarchical Reasoning Model.
+    arXiv:2506.21734, 2025.
+    https://arxiv.org/abs/2506.21734
+
+Original checkpoints used for reproduction (not redistributed here):
+
+    https://huggingface.co/sapientinc/HRM-checkpoint-sudoku-extreme
+    https://huggingface.co/sapientinc/HRM-checkpoint-maze-30x30-hard
+    https://huggingface.co/sapientinc/HRM-checkpoint-ARC-2
+
+Modifications and original work in this tree (Apache-2.0 as well):
+
+    * hrm_gear/                 local runtime, tokenisation, ACT loops
+    * hrm_gear/compat/          MPS/CPU SDPA stand-in for FlashAttention
+    * scripts/                  inference smoke harnesses
+    * docs/                     architecture, environment, experiments
+    * config/model_matrix.v1.yaml
+    * README.md                 project charter (replaces upstream README
+                                at the repository root; upstream README is
+                                preserved at docs/upstream/HRM.README.md)
+
+Dataset submodules referenced by upstream remain under their own licenses
+(see .gitmodules): François Chollet / ARC Prize ARC-AGI, ARC-AGI-2, and
+ConceptARC.
+
+FlashAttention (Tri Dao et al.) is an upstream training dependency.
+This fork does not vendor FlashAttention. On Apple Silicon we substitute
+torch.nn.functional.scaled_dot_product_attention. That substitution is
+an inference-only compatibility layer, not a claim of FlashAttention
+numerics or performance.
