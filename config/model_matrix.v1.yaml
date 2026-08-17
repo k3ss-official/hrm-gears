@@ -1,11 +1,13 @@
-# hrm-gear model capability matrix v1.0
+# hrm-gears model capability matrix v1.0
 #
-# The router exists to put every subtask on the cheapest model that can
-# still do the job. Tiers are strictly ordered. Within a tier, prefer
-# the cheaper / faster option. This file is the contract for synthetic
-# training-data generation; it is not yet consumed by a trained head.
+# MVP snapshot. Frozen sources only. The router (Stage 2) will learn this
+# table; nothing here is consumed by a trained head yet.
 #
-# Sources locked by the project owner. IDs are stable.
+# Strict order: free → non-frontier sub → frontier sub →
+# non-frontier API → frontier API. Within a tier, cheaper / faster wins.
+#
+# Vendors locked for MVP:
+#   OpenCode Go, Nous Portal, OpenAI OAuth, OpenCode Zen, Nvidia, OpenRouter.
 
 version: "1.0"
 rule: "lowest-viable-tier-wins"
@@ -35,13 +37,16 @@ tiers:
       - id: nous-qwen
         source: Nous Portal
         notes: Qwen3-class
+      - id: nous-hy3
+        source: Nous Portal
+        notes: Mid fill
       - id: openai-nonfrontier
         source: OpenAI OAuth
         notes: Mini / non-Sol class
   3:
     name: frontier-subscription
     models:
-      - id: openai-gpt-sol
+      - id: openai-gpt56-sol
         source: OpenAI OAuth
         notes: High-end reasoning
       - id: nous-fable5
@@ -50,16 +55,21 @@ tiers:
       - id: nous-gemini
         source: Nous Portal
         notes: Long context / multimodal
-      - id: grok-build-46
-        source: local Grok Build CLI
-        notes: Grok 4.6 on the M4; long-running agent, 500k context
+      - id: opencode-go-frontier
+        source: OpenCode Go
+        notes: Frontier exposed via Go
   4:
     name: non-frontier-api
     models:
       - id: openrouter-mid
         source: OpenRouter
+        notes: Cost-controlled
       - id: nvidia-nemotron
-        source: Nvidia API
+        source: Nvidia
+        notes: Nemotron API
+      - id: opencode-zen-paid
+        source: OpenCode Zen
+        notes: Paid non-frontier on Zen
   5:
     name: frontier-api
     models:
@@ -67,7 +77,8 @@ tiers:
         source: OpenRouter
         notes: Last resort
       - id: nvidia-frontier
-        source: Nvidia API
+        source: Nvidia
+        notes: Last resort
 
 capability_axes:
   - reasoning_depth   # shallow | medium | deep | architectural

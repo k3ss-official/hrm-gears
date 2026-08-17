@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+# Door 1. Thin wrapper so the hero command is ./setup
+set -euo pipefail
+ROOT="$(cd "$(dirname "$0")" && pwd)"
+exec "${ROOT}/scripts/setup" "$@"

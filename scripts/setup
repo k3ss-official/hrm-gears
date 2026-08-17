@@ -1,0 +1,172 @@
+#!/usr/bin/env bash
+# hrm-gears — single install / smoke entrypoint.
+# Narrated stages. Reuses .venv. Non-zero exit on any fail.
+set -euo pipefail
+
+ROOT="$(cd "$(dirname "$0")/.." && pwd)"
+cd "$ROOT"
+
+STAGES=6
+PASS=()
+FAIL=()
+SKIP=()
+
+if [[ -t 1 ]]; then
+  BOLD=$'\033[1m'
+  DIM=$'\033[2m'
+  RED=$'\033[31m'
+  GRN=$'\033[32m'
+  YLW=$'\033[33m'
+  CYN=$'\033[36m'
+  RST=$'\033[0m'
+else
+  BOLD="" DIM="" RED="" GRN="" YLW="" CYN="" RST=""
+fi
+
+say()  { printf '%s\n' "$*"; }
+ok()   { PASS+=("$1"); printf '  %sOK%s   %s\n' "$GRN" "$RST" "$1"; }
+warn() { SKIP+=("$1"); printf '  %sSKIP%s %s\n' "$YLW" "$RST" "$1"; }
+bad()  { FAIL+=("$1"); printf '  %sFAIL%s %s\n' "$RED" "$RST" "$1"; }
+
+stage() {
+  local n="$1" title="$2"
+  printf '\n%s[%s/%s]%s %s%s%s\n' "$CYN" "$n" "$STAGES" "$RST" "$BOLD" "$title" "$RST"
+}
+
+need_bytes=$((8 * 1024 * 1024 * 1024))
+
+summary_and_exit() {
+  local code="$1"
+  printf '\n%s======== SUMMARY ========%s\n' "$BOLD" "$RST"
+  if ((${#PASS[@]})); then
+    printf '%sPASS%s (%d)\n' "$GRN" "$RST" "${#PASS[@]}"
+    printf '  - %s\n' "${PASS[@]}"
+  fi
+  if ((${#SKIP[@]})); then
+    printf '%sSKIP%s (%d)\n' "$YLW" "$RST" "${#SKIP[@]}"
+    printf '  - %s\n' "${SKIP[@]}"
+  fi
+  if ((${#FAIL[@]})); then
+    printf '%sFAIL%s (%d)\n' "$RED" "$RST" "${#FAIL[@]}"
+    printf '  - %s\n' "${FAIL[@]}"
+  fi
+  if [[ "$code" -ne 0 ]]; then
+    printf '\n%ssetup failed%s — fix the FAIL lines and rerun ./setup\n' "$RED" "$RST"
+  else
+    printf '\n%ssetup passed%s — Door 1 is green. Activate with: source .venv/bin/activate\n' "$GRN" "$RST"
+  fi
+  exit "$code"
+}
+
+die_stage() {
+  bad "$1"
+  summary_and_exit 1
+}
+
+printf '%s\n' "${BOLD}hrm-gears setup${RST}"
+printf '%sDoor 1 — probe, venv, install, checkpoints, Sudoku + multi smoke%s\n' "$DIM" "$RST"
+printf '%srepo%s %s\n' "$DIM" "$RST" "$ROOT"
+
+# ---------------------------------------------------------------------------
+stage 1 "dep probe (Python, platform, accelerator, disk)"
+
+uname_s="$(uname -s)"
+uname_m="$(uname -m)"
+say "  platform  ${uname_s}/${uname_m}"
+
+PYTHON=""
+for cand in "${PYTHON:-}" python3.12 python3; do
+  [[ -z "$cand" ]] && continue
+  if command -v "$cand" >/dev/null 2>&1; then
+    PYTHON="$(command -v "$cand")"
+    break
+  fi
+done
+[[ -n "$PYTHON" ]] || die_stage "python3.12+ not on PATH"
+
+py_ver="$("$PYTHON" -c 'import sys; print("%d.%d.%d" % sys.version_info[:3])')"
+py_ok="$("$PYTHON" -c 'import sys; raise SystemExit(0 if sys.version_info >= (3, 12) else 1)')" || die_stage "need Python >= 3.12 (found ${py_ver} at ${PYTHON})"
+ok "python ${py_ver} (${PYTHON})"
+
+avail="$(ROOT="$ROOT" "$PYTHON" -c 'import os, shutil; print(shutil.disk_usage(os.environ["ROOT"]).free)')"
+if [[ "$avail" -lt "$need_bytes" ]]; then
+  die_stage "disk free ${avail} bytes; want >= 8 GiB for venv + three checkpoints"
+fi
+ok "disk $("$PYTHON" -c "print(f'{$avail/1024**3:.1f} GiB free')")"
+
+ACCEL="cpu"
+if command -v nvidia-smi >/dev/null 2>&1 && nvidia-smi -L >/dev/null 2>&1; then
+  ACCEL="cuda"
+  ok "nvidia-smi present (CUDA lane)"
+else
+  say "  nvidia-smi  not present (ok — MPS/CPU is the M4 path)"
+fi
+
+# MPS probe uses whatever python we have; torch may not exist yet.
+if [[ "$uname_s" == "Darwin" && "$uname_m" == "arm64" ]]; then
+  ok "Apple Silicon — MPS expected after torch install"
+  ACCEL_HINT="mps"
+else
+  ACCEL_HINT="$ACCEL"
+fi
+say "  accel hint  ${ACCEL_HINT}"
+
+# ---------------------------------------------------------------------------
+stage 2 "venv create / reuse"
+
+if [[ -x .venv/bin/python ]]; then
+  ok "reusing .venv"
+else
+  say "  creating .venv with ${PYTHON}"
+  "$PYTHON" -m venv .venv || die_stage "venv create failed"
+  ok "created .venv"
+fi
+# shellcheck disable=SC1091
+source .venv/bin/activate
+ok "venv python $(python -c 'import sys; print(sys.version.split()[0])')"
+
+# ---------------------------------------------------------------------------
+stage 3 "install (torch, requirements, SDPA flash_attn shim)"
+
+say "  pip + requirements (bootstrap_env.sh)"
+if ! ./scripts/bootstrap_env.sh; then
+  die_stage "bootstrap_env.sh"
+fi
+ok "bootstrap_env.sh"
+
+# ---------------------------------------------------------------------------
+stage 4 "checkpoint fetch (Hugging Face; gitignored)"
+
+need_fetch=0
+for short in sudoku-extreme maze-30x30-hard ARC-2; do
+  if [[ ! -f "checkpoints/${short}/checkpoint" ]]; then
+    need_fetch=1
+  fi
+done
+if [[ "$need_fetch" -eq 0 ]]; then
+  ok "checkpoints already on disk (sudoku / maze / ARC-2)"
+else
+  say "  fetching sapientinc HRM checkpoints (not redistributed in git)"
+  if ! python scripts/fetch_checkpoints.py; then
+    die_stage "fetch_checkpoints.py"
+  fi
+  ok "fetch_checkpoints.py"
+fi
+
+# ---------------------------------------------------------------------------
+stage 5 "Sudoku ACT smoke"
+
+if ! python scripts/smoke_test_inference.py; then
+  die_stage "smoke_test_inference.py (Sudoku)"
+fi
+ok "Sudoku smoke"
+
+# ---------------------------------------------------------------------------
+stage 6 "Maze + ARC-2 smoke (16-step vs early-exit)"
+
+if ! python scripts/smoke_test_all.py; then
+  die_stage "smoke_test_all.py (Maze + ARC-2)"
+fi
+ok "Maze + ARC-2 smoke"
+
+summary_and_exit 0

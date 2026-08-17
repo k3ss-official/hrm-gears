@@ -11,8 +11,15 @@ We do not pretend otherwise.
 
 ## Bootstrap
 
+Door 1 (preferred):
+
 ```bash
-cd /Volumes/hermes/play/hrm-gear
+./setup
+```
+
+Door 2 (unwrapped):
+
+```bash
 ./scripts/bootstrap_env.sh
 source .venv/bin/activate
 python scripts/fetch_checkpoints.py   # Hugging Face; weights are not in git

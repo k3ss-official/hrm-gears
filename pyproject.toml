@@ -1,5 +1,5 @@
 [project]
-name = "hrm-gear"
+name = "hrm-gears"
 version = "0.1.0"
 description = "Adapt Sapient HRM (27M hierarchical recurrent + ACT) into a cheapest-viable model router."
 readme = "README.md"
@@ -9,7 +9,7 @@ authors = [{ name = "Tony Whelan", email = "k3ss.official@gmail.com" }]
 dependencies = []
 
 [project.urls]
-Homepage = "https://github.com/k3ss-official/hrm-gear"
+Homepage = "https://github.com/k3ss-official/hrm-gears"
 Upstream = "https://github.com/sapientinc/HRM"
 Paper = "https://arxiv.org/abs/2506.21734"
 
