@@ -12,11 +12,11 @@ capability matrix plus a discrete choice — any harness that can annotate a
 subtask and honour a model id can point at the same unit. Hermes is the
 design centre, not a hard dependency.
 
-Pre-work was a survey of non-AR / non-standard models, including Inception
-**Mercury 2** (diffusion LM — a gear, not a supervisor) and TRM. HRM is
-the line known longest: dual timescale plus an ACT halt head already
-looks like a monitor that *allots* work. Routing is allocation under
-trained parameters, not an essay. See
+Pre-work was not "stay on Transformers because they are easy". Survey
+included Inception **Mercury 2** (diffusion LM), **Sakana AI**
+([sakana.ai](https://sakana.ai/) — Fugu / Namazu API), and TRM. HRM is the line known longest: dual timescale plus
+an ACT halt head already looks like a monitor that *allots* work.
+Routing is allocation under trained parameters, not an essay. See
 [`docs/architecture.md`](docs/architecture.md#pre-work).
 
 The original research code, paper, and checkpoints are **Sapient Intelligence's**.

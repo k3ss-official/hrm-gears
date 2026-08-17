@@ -39,7 +39,10 @@ re-implementation and not a claim of authorship.
 The original project README is preserved at
 [upstream/HRM.README.md](upstream/HRM.README.md).
 
-## Surveyed, not chosen as the router
+## Surveyed (not the router)
+
+The owner does not default to Transformers because they are convenient.
+These lines were on the desk before this tree was cut.
 
 Inception Labs (Khanna, Kharbanda, Li, Varma, Wang, et al.).
 **Mercury: Ultra-Fast Language Models Based on Diffusion.**
@@ -47,13 +50,18 @@ arXiv:2506.17298, 2025.
 <https://arxiv.org/abs/2506.17298>
 <https://www.inceptionlabs.ai/>
 
-Mercury / Mercury 2 is a diffusion LLM: non-autoregressive generation,
-Transformer-parameterised denoiser. Looked at as a non-standard LM.
-Rejected as the *router* because it still generates language; the job
-here is allotment. It remains a candidate **gear** in the matrix.
+Mercury 2 — diffusion LM, non-autoregressive generation. Evaluated.
+Remains a candidate **gear**.
 
-Tiny Recursive Models (TRM) — recursive refinement in the same
-neighbourhood as HRM. Noted, not the unit in this tree.
+Sakana AI (Tokyo).
+<https://sakana.ai/>
+<https://console.sakana.ai/>
+
+Nature-inspired / evolutionary model work. Live API: Fugu, Namazu.
+In the owner's toolkit. Gear / research line, not the derailleur.
+
+Tiny Recursive Models (TRM) — recursive refinement next to HRM. Noted,
+not the unit in this tree.
 
 ## Adaptive Computation Time
 

@@ -16,23 +16,26 @@ What follows is a reading of *their* system, plus the mapping we are testing.
 
 ## Pre-work
 
-This repo did not start from "find a small Transformer". The owner had
-already looked at several **non-autoregressive / non-standard** lines
-before settling here.
+This repo did not start from "another Transformer, but smaller". The
+owner already shops non-default architectures and has live API access
+to more than one of them. Transformers are easy. That is not a reason
+to stop looking.
 
-**Mercury 2 (Inception Labs)** is a commercial-scale **diffusion language
-model** (Khanna et al., 2025). Generation is iterative denoising, not
-left-to-right next-token. Fast, and genuinely not autoregressive. It is
-still a *language model*: it emits text. The published Mercury write-up
-parameterises the denoiser with Transformer blocks. Useful as a **gear**.
-The wrong *kind* of machine for the **derailleur**. A router that writes
-essays in order to pick a model is the failure mode we are leaving.
+**Mercury 2 (Inception Labs)** — diffusion LM (Khanna et al., 2025).
+Non-autoregressive: the sequence is denoised, not typed left to right.
+Looked at as a serious alternative generation stack. Kept as a **gear**.
 
-**TRM (Tiny Recursive Models)** sits in the same recursive-refinement
-neighbourhood as HRM. Still interesting. Not the unit we have lived with.
+**Sakana AI** (Tokyo, [sakana.ai](https://sakana.ai/)) — nature-inspired
+/ evolutionary model construction. Live OpenAI-compatible API
+([console.sakana.ai](https://console.sakana.ai/)): Fugu (multi-agent
+orchestrator) and Namazu (Japanese in-house model). In the owner's
+toolkit. Also a gear / research line, not the router.
 
-**HRM** is the one known longest. Its *core loop* already behaves like a
-supervisor / monitor / floor-manager:
+**TRM (Tiny Recursive Models)** — recursive refinement in the same
+neighbourhood as HRM. Noted.
+
+**HRM** is the line known longest, and the one whose *core loop* already
+behaves like a supervisor / monitor / floor-manager:
 
 - `z_H` holds a slow plan.
 - `z_L` burns inner steps on the current allocation.
@@ -44,7 +47,7 @@ not comprehensive reasoning. It is **allotment**: given a tagged subtask
 and a trained parameterisation of the matrix, send this job there. The
 decision does not need to be wide. It needs to be cheap, repeatable, and
 wrong in a way we can escalate. A 27M hierarchical recurrent net with a
-halt head is the right size of brain for that. A diffusion LM is not.
+halt head is the right size of brain for that.
 
 ## Why a non-Transformer
 
