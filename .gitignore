@@ -4,8 +4,10 @@
 /checkpoints/
 # cache
 /cache/
-# data
-/data/
+# data (raw dumps stay out; published routing JSONL is tracked)
+/data/*
+!/data/routing/
+!/data/routing/**
 
 # Twin-T4 harvest scratch (packs + pulled artifacts)
 /var/

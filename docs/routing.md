@@ -58,18 +58,23 @@ Output:
 `matrix_version` is carried on every example. v1.0 is
 `config/model_matrix.v1.yaml`.
 
-## Data mix (not yet generated)
+## Data mix
 
-| Source | share | purpose |
+v1 drop lives at [`data/routing/v1/`](../data/routing/v1/). Real Hermes
+traces are **not** in this drop (that 25% slot stays empty until traces
+exist). Generator: `scripts/routing_data/generate.py`. Gate:
+`scripts/routing_data/validate.py --strict`.
+
+| Source | share (this drop) | purpose |
 | --- | --- | --- |
-| Synthetic from the matrix | 55% | combinatorial coverage |
-| Real Hermes traces | 25% | actual outcomes |
-| Adversarial / edge | 15% | force escalations |
-| Negatives | 5%+ | teach when *not* to pick a model |
+| Synthetic from the matrix | ~77% (55% combo + fill) | combinatorial coverage |
+| Real Hermes traces | 0% (deferred) | actual outcomes |
+| Adversarial / edge | ~16% | force escalations |
+| Negatives | ~7% | teach when *not* to pick a model |
 
-Coverage gates before a training run: ≥30 positives per
-`reasoning_depth × tool_use × stakes` cell; every model ID chosen ≥40
-times; ≥15% forced tier escalations.
+ASK v1 gates (this drop): ≥20 per `reasoning_depth × tool_use × stakes`
+cell; every matrix id chosen ≥15 times; ≥15% forced tier escalations.
+Stricter later gates (≥30 / ≥40) wait for traces.
 
 ## Training compute (intended, not run)
 
