@@ -1,0 +1,15 @@
+# Keep Door 3 image a source snapshot, not a host venv.
+.git
+.venv
+var
+checkpoints
+wandb
+cache
+data
+**/__pycache__
+*.pyc
+.DS_Store
+*.egg-info
+.pytest_cache
+.mypy_cache
+.ipynb_checkpoints

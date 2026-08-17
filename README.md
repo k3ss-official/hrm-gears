@@ -67,15 +67,20 @@ Do not mix those numbers with SDPA/MPS runs.
 
 ### Door 3 — Docker one-shot
 
-Same `./setup`, inside a container (CPU). The image is the install door,
-not the Twin-T4 harvest pack (`docs/compute.md`).
+Same `./setup`, inside a container (**CPU**). The image is the install
+door, not the Twin-T4 harvest pack.
 
 ```bash
 docker compose run --rm setup
 ```
 
-If `Dockerfile` / `compose.yaml` are not in this tree yet, use Door 1.
-GPU pack/harvest is a separate path.
+That builds `Dockerfile` if needed, runs `./setup` unchanged, and
+removes the container. Linux `.venv` and checkpoints live in Compose
+named volumes (`hrm-gears_venv`, `hrm-gears_checkpoints`) so a host
+M4 `.venv` is not overwritten.
+
+GPU pack / harvest is **not** this image:
+[`scripts/kaggle/`](scripts/kaggle/) and [`docs/compute.md`](docs/compute.md).
 
 ## MVP vs Stage 2
 

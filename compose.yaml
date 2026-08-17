@@ -1,0 +1,21 @@
+# Door 3 — CPU one-shot. Exact command:
+#   docker compose run --rm setup
+#
+# Named volumes keep Linux .venv / checkpoints off the host M4 tree.
+# GPU harvest is not this file. See scripts/kaggle and docs/compute.md.
+name: hrm-gears
+
+services:
+  setup:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    working_dir: /work
+    command: ["./setup"]
+    volumes:
+      - venv:/work/.venv
+      - checkpoints:/work/checkpoints
+
+volumes:
+  venv:
+  checkpoints:

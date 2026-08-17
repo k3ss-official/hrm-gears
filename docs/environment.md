@@ -25,6 +25,12 @@ source .venv/bin/activate
 python scripts/fetch_checkpoints.py   # Hugging Face; weights are not in git
 ```
 
+Door 3 (CPU container; does not touch the host `.venv`):
+
+```bash
+docker compose run --rm setup
+```
+
 `bootstrap_env.sh` writes a `.pth` into site-packages so
 
 ```python
