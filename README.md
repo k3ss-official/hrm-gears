@@ -1,10 +1,10 @@
 # hrm-gears
 
-**Adapt Sapient's 27M Hierarchical Reasoning Model into a local, cheapest-viable model router.**
+**Adapt Sapient's 27MM (that's million not billion) Hierarchical Reasoning Model into a local, cheapest-capable-viable model router.**
 
 This is not a Transformer project. HRM (Wang et al., 2025) is a dual-timescale recurrent network with an ACT halt head. We are measuring whether that architecture can sit in front of a tool-using agent harness and pick the lowest-cost model that can still do the subtask.
 
-The first consumer is **Hermes** ([@NousResearch](https://x.com/NousResearch)). The interface is a capability matrix plus a discrete choice — any harness that can annotate a subtask and honour a model id can point at the same unit. Hermes is the design centre, not a hard dependency.
+The first consumer is **Hermes Agent** ([@NousResearch](https://x.com/NousResearch)). The interface is a capability matrix plus a discrete choice — any harness that can annotate a subtask and honour a model id can point at the same unit. Hermes is the design centre, not a hard dependency.
 
 Pre-work was not "stay on Transformers because they are easy". Survey included Inception **Mercury 2** (diffusion LM), **Sakana AI** ([sakana.ai](https://sakana.ai/) — Fugu / Namazu API), and TRM. HRM is the line known longest: dual timescale plus an ACT halt head already looks like a monitor that *allots* work. Routing is allocation under trained parameters, not an essay. See [`docs/architecture.md`](docs/architecture.md#pre-work).
 
