@@ -149,8 +149,8 @@ Keep: H/L recurrence, ACT wrapper, 27M trunk, published initialisation.
 
 Change (this repo):
 
-- FlashAttention → SDPA on Apple Silicon (`hrm_gear/compat/flash_attn`).
-- CUDA-only `evaluate.py` path → `hrm_gear.runtime` (CPU/MPS, strict load).
+- FlashAttention → SDPA on Apple Silicon (`hrm_gears/compat/flash_attn`).
+- CUDA-only `evaluate.py` path → `hrm_gears.runtime` (CPU/MPS, strict load).
 - Output head (future): discrete model ID + confidence + escalate, trained
   on the matrix in `config/model_matrix.v1.yaml`.
 

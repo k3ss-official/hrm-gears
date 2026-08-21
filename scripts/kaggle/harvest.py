@@ -4,7 +4,7 @@
 Requires the Kaggle CLI and an API token at ~/.kaggle/kaggle.json
 (create one at https://www.kaggle.com/settings — never commit it).
 
-    python scripts/kaggle/harvest.py --kernel $KAGGLE_USERNAME/hrm-gear-twin-t4
+    python scripts/kaggle/harvest.py --kernel $KAGGLE_USERNAME/hrm-gears-twin-t4
 
 Stops short of deleting the remote notebook. Teardown is: stop the
 Kaggle session in the UI so the VM dies. See docs/compute.md.
@@ -43,7 +43,7 @@ def main() -> int:
     parser.add_argument(
         "--kernel",
         required=True,
-        help="Kaggle kernel id: <username>/hrm-gear-twin-t4",
+        help="Kaggle kernel id: <username>/hrm-gears-twin-t4",
     )
     parser.add_argument(
         "--out",

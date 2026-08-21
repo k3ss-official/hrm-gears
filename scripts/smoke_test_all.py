@@ -19,8 +19,8 @@ ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-from hrm_gear.runtime import format_bytes, load_hrm, pick_device, run_act  # noqa: E402
-from hrm_gear.tokenize import encode_arc, encode_maze, make_batch  # noqa: E402
+from hrm_gears.runtime import format_bytes, load_hrm, pick_device, run_act  # noqa: E402
+from hrm_gears.tokenize import encode_arc, encode_maze, make_batch  # noqa: E402
 
 
 @dataclass(frozen=True)

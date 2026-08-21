@@ -36,7 +36,7 @@ derailleur  = HRM driven(candidate)
 ```
 
 Repo: [`k3ss-official/hrm-gears`](https://github.com/k3ss-official/hrm-gears).
-The Python package import is still `hrm_gear`.
+The Python package import is `hrm_gears`.
 
 ## Install — three doors
 
@@ -169,7 +169,7 @@ Full reading: [`docs/architecture.md`](docs/architecture.md).
 ./setup                   Door 1 — probe, venv, fetch, smokes
 Dockerfile  compose.yaml  Door 3 — CPU one-shot
 assets/hrm-gears-banner.jpg
-hrm_gear/                 runtime (import name; display repo is hrm-gears)
+hrm_gears/                runtime package
 scripts/                  bootstrap, fetch, smokes, setup
 scripts/kaggle/           Twin-T4 pack / harvest (not Door 3)
 data/routing/v1/          synthetic allotment JSONL

@@ -23,7 +23,7 @@ ROOT = Path(__file__).resolve().parents[2]
 PACK_PARENT = ROOT / "var" / "kaggle-pack"
 
 COPY_DIRS = (
-    "hrm_gear",
+    "hrm_gears",
     "models",
     "scripts",
     "config",
@@ -75,7 +75,7 @@ def copy_tree(src: Path, dest: Path) -> None:
 def write_kernel_metadata(dest: Path, username: str, slug: str) -> None:
     payload = {
         "id": f"{username}/{slug}",
-        "title": "hrm-gear Twin-T4 harvest",
+        "title": "hrm-gears Twin-T4 harvest",
         "code_file": "twin_t4.ipynb",
         "language": "python",
         "kernel_type": "notebook",
@@ -108,8 +108,8 @@ def main() -> int:
     )
     parser.add_argument(
         "--kernel-slug",
-        default="hrm-gear-twin-t4",
-        help="Kaggle kernel slug (default: hrm-gear-twin-t4)",
+        default="hrm-gears-twin-t4",
+        help="Kaggle kernel slug (default: hrm-gears-twin-t4)",
     )
     args = parser.parse_args()
 

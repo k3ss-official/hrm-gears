@@ -1,6 +1,6 @@
 {
-  "id": "REPLACE_ME/hrm-gear-twin-t4",
-  "title": "hrm-gear Twin-T4 harvest",
+  "id": "REPLACE_ME/hrm-gears-twin-t4",
+  "title": "hrm-gears Twin-T4 harvest",
   "code_file": "twin_t4.ipynb",
   "language": "python",
   "kernel_type": "notebook",

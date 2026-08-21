@@ -37,7 +37,7 @@ docker compose run --rm setup
 from flash_attn import flash_attn_func
 ```
 
-resolves to `hrm_gear/compat/flash_attn`. Upstream `models/layers.py` is
+resolves to `hrm_gears/compat/flash_attn`. Upstream `models/layers.py` is
 unmodified.
 
 ## What is installed vs what is not
@@ -52,7 +52,7 @@ unmodified.
 
 ## Device policy
 
-`hrm_gear.runtime.pick_device()` prefers CUDA, then MPS, then CPU. Smoke harnesses
+`hrm_gears.runtime.pick_device()` prefers CUDA, then MPS, then CPU. Smoke harnesses
 attempt MPS, catch SDPA/device failures, and retry on CPU. `empty_carry`
 allocates on CPU; `move_carry` places `z_H` / `z_L` on the compute device.
 

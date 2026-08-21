@@ -21,13 +21,13 @@ ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-from hrm_gear.runtime import (  # noqa: E402
+from hrm_gears.runtime import (  # noqa: E402
     format_bytes,
     load_hrm,
     pick_device,
     run_act,
 )
-from hrm_gear.tokenize import decode_sudoku, encode_sudoku, make_batch  # noqa: E402
+from hrm_gears.tokenize import decode_sudoku, encode_sudoku, make_batch  # noqa: E402
 
 DEFAULT = ROOT / "checkpoints" / "sapientinc" / "HRM-checkpoint-sudoku-extreme"
 FALLBACK = ROOT / "checkpoints" / "sudoku-extreme"

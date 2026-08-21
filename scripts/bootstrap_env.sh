@@ -4,7 +4,7 @@
 # Upstream HRM (Wang et al., 2025) requires CUDA 12.x + FlashAttention.
 # This script does *not* install those. It installs PyTorch MPS, the
 # published Python deps, and a site .pth so `import flash_attn` resolves
-# to hrm_gear.compat.flash_attn (SDPA).
+# to hrm_gears.compat.flash_attn (SDPA).
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
@@ -26,7 +26,7 @@ python -m pip install -r requirements.txt
 python -m pip install numpy
 
 SITE="$(python -c 'import site; print(site.getsitepackages()[0])')"
-echo "${ROOT}/hrm_gear/compat" > "${SITE}/hrm_gear_flash_attn.pth"
+echo "${ROOT}/hrm_gears/compat" > "${SITE}/hrm_gears_flash_attn.pth"
 
 python - <<'PY'
 import flash_attn

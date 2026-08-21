@@ -77,7 +77,7 @@ Account is already phone-verified. No card.
 4. **File → Import Notebook** → `scripts/kaggle/twin_t4.ipynb`
    (or the copy under the pack dir). Keep the notebook **private**.
 
-5. Optional pin: add a session env var `HRM_GEAR_SHA=<sha from step 1>`
+5. Optional pin: add a session env var `HRM_GEARS_SHA=<sha from step 1>`
    so the clone checks out that commit. Otherwise it tracks `main`.
 
 6. **Save Version → Save & Run All (Commit)**. Do not babysit an
@@ -93,7 +93,7 @@ Account is already phone-verified. No card.
 
    ```bash
    pip install kaggle   # once
-   python scripts/kaggle/harvest.py --kernel "$KAGGLE_USERNAME/hrm-gear-twin-t4"
+   python scripts/kaggle/harvest.py --kernel "$KAGGLE_USERNAME/hrm-gears-twin-t4"
    ```
 
 9. **Stop** the session. Account → **Code** → nothing running. The VM
@@ -155,8 +155,8 @@ If you already have a local NVIDIA box and want the same session body
 without the Kaggle UI:
 
 ```bash
-docker build -f scripts/kaggle/Dockerfile -t hrm-gear-twin-t4 .
-docker run --gpus all --rm -v "$PWD/var/kaggle-harvest/local:/out" hrm-gear-twin-t4
+docker build -f scripts/kaggle/Dockerfile -t hrm-gears-twin-t4 .
+docker run --gpus all --rm -v "$PWD/var/kaggle-harvest/local:/out" hrm-gears-twin-t4
 ```
 
 This is a skeleton. Prefer Kaggle T4 x2 for the cited harvest.

@@ -23,7 +23,7 @@ if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
 # Kaggle's image rarely has FlashAttention CUDA extensions. Use the SDPA shim.
-COMPAT = ROOT / "hrm_gear" / "compat"
+COMPAT = ROOT / "hrm_gears" / "compat"
 if str(COMPAT) not in sys.path:
     sys.path.insert(0, str(COMPAT))
 
@@ -77,8 +77,8 @@ def resolve_sudoku() -> Path:
 def run_smoke(device_name: str) -> dict:
     import torch
 
-    from hrm_gear.runtime import load_hrm, run_act
-    from hrm_gear.tokenize import decode_sudoku, encode_sudoku, make_batch
+    from hrm_gears.runtime import load_hrm, run_act
+    from hrm_gears.tokenize import decode_sudoku, encode_sudoku, make_batch
 
     device = torch.device(device_name)
     ckpt = resolve_sudoku()
@@ -134,7 +134,7 @@ def main() -> int:
     if cuda:
         device_name = "cuda"
     elif args.allow_cpu:
-        from hrm_gear.runtime import pick_device
+        from hrm_gears.runtime import pick_device
 
         device_name = str(pick_device())
     else:

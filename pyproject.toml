@@ -14,4 +14,4 @@ Upstream = "https://github.com/sapientinc/HRM"
 Paper = "https://arxiv.org/abs/2506.21734"
 
 [tool.setuptools.packages.find]
-include = ["hrm_gear*"]
+include = ["hrm_gears*"]

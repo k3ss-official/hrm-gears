@@ -14,4 +14,4 @@ jobs:
         with:
           python-version: "3.12"
       - name: Syntax check (no CUDA, no weights)
-        run: python -m compileall -q hrm_gear scripts
+        run: python -m compileall -q hrm_gears scripts
