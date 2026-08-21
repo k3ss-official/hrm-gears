@@ -9,6 +9,19 @@ The paper's training stack is CUDA 12.6 + FlashAttention 2/3 on NVIDIA
 Ampere/Hopper (Wang et al., 2025, README). That stack **does not build here**.
 We do not pretend otherwise.
 
+## Python 3.12
+
+Doors 1 and 2 require **Python ≥ 3.12**. `./setup` probes `python3.12`
+then `python3` and exits non-zero on 3.10 / 3.11. Door 3 is
+`python:3.12-slim` and does not use the host interpreter.
+
+Install recipes (Homebrew, miniforge, apt, uv):
+[README — Python 3.12](../README.md#python-312).
+
+```bash
+python3.12 --version   # must print 3.12.x before ./setup
+```
+
 ## Bootstrap
 
 Door 1 (preferred):

@@ -82,10 +82,10 @@ for cand in "${PYTHON:-}" python3.12 python3; do
     break
   fi
 done
-[[ -n "$PYTHON" ]] || die_stage "python3.12+ not on PATH"
+[[ -n "$PYTHON" ]] || die_stage "python3.12+ not on PATH — install 3.12 (README: Python 3.12)"
 
 py_ver="$("$PYTHON" -c 'import sys; print("%d.%d.%d" % sys.version_info[:3])')"
-py_ok="$("$PYTHON" -c 'import sys; raise SystemExit(0 if sys.version_info >= (3, 12) else 1)')" || die_stage "need Python >= 3.12 (found ${py_ver} at ${PYTHON})"
+py_ok="$("$PYTHON" -c 'import sys; raise SystemExit(0 if sys.version_info >= (3, 12) else 1)')" || die_stage "need Python >= 3.12 (found ${py_ver} at ${PYTHON}); install 3.12 (README: Python 3.12)"
 ok "python ${py_ver} (${PYTHON})"
 
 avail="$(ROOT="$ROOT" "$PYTHON" -c 'import os, shutil; print(shutil.disk_usage(os.environ["ROOT"]).free)')"

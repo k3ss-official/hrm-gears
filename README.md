@@ -40,6 +40,45 @@ The Python package import is `hrm_gears`.
 
 ## Install — three doors
 
+Doors 1 and 2 need **Python 3.12+** on `PATH` as `python3.12` (then
+`python3`). 3.10 / 3.11 fail the probe. Door 3 ships 3.12 in the image.
+
+### Python 3.12
+
+Confirm after any of the recipes: `python3.12 --version`.
+
+macOS (Homebrew) — generic:
+
+```bash
+brew install python@3.12
+export PATH="$(brew --prefix python@3.12)/bin:$PATH"
+```
+
+macOS (miniforge / conda-forge) — the measured M4 interpreter is
+3.12.11 at this prefix:
+
+```bash
+export PATH="/opt/homebrew/Caskroom/miniforge/base/bin:$PATH"
+# first time only, if that python3.12 is missing:
+#   brew install --cask miniforge
+#   conda install python=3.12
+```
+
+Linux (Ubuntu / Debian):
+
+```bash
+sudo apt update
+sudo apt install python3.12 python3.12-venv
+```
+
+Any OS ([uv](https://docs.astral.sh/uv/)):
+
+```bash
+curl -LsSf https://astral.sh/uv/install.sh | sh
+uv python install 3.12
+export PATH="$(dirname "$(uv python find 3.12)"):$PATH"
+```
+
 ### Door 1 — `./setup` (default)
 
 Single entrypoint. Probes Python / platform / MPS-or-CUDA / disk, creates or
@@ -49,6 +88,7 @@ then Maze+ARC-2 smokes. Narrated stages. Non-zero exit on fail.
 ```bash
 git clone https://github.com/k3ss-official/hrm-gears.git
 cd hrm-gears
+python3.12 --version   # 3.12.x — recipes above
 ./setup
 ```
 
