@@ -1,4 +1,4 @@
-# Door 3 — CPU install / smoke. Runs ./setup unchanged.
+# Door 3 — CPU install / smoke. Runs ./setup --yes (no prompts).
 # Not Twin-T4 harvest. GPU path: scripts/kaggle + docs/compute.md
 FROM python:3.12-slim-bookworm
 
@@ -15,4 +15,4 @@ RUN chmod +x setup scripts/setup scripts/bootstrap_env.sh \
     && rm -rf .venv
 
 # Checkpoints are fetched at run time (gitignored, not baked).
-CMD ["./setup"]
+CMD ["./setup", "--yes"]

@@ -40,12 +40,30 @@ The Python package import is `hrm_gears`.
 
 ## Install — three doors
 
-Doors 1 and 2 need **Python 3.12+** on `PATH` as `python3.12` (then
-`python3`). 3.10 / 3.11 fail the probe. Door 3 ships 3.12 in the image.
+Hero path: clone, `cd`, `./setup`. On a terminal it is **interactive** —
+it probes the box, prints the command it will run, and pauses if
+something is missing (`Python 3.12 is missing. Install? [Y/n]`). `--yes`
+is unattended (Door 3 / CI).
 
-### Python 3.12
+### Door 1 — `./setup` (default)
 
-Confirm after any of the recipes: `python3.12 --version`.
+```bash
+git clone https://github.com/k3ss-official/hrm-gears.git
+cd hrm-gears
+./setup
+```
+
+Creates or reuses `.venv` with Python 3.12, installs torch + the SDPA
+shim, fetches published checkpoints, runs smokes. Offers to install
+3.12 (Homebrew, apt, or uv) when the probe fails. `--sudoku` skips
+Maze + ARC-2 (~2.2 GiB).
+
+### Python 3.12 (manual)
+
+`./setup` will offer this. Use the recipes if you prefer to install the
+interpreter yourself, or if you declined the prompt.
+
+Confirm: `python3.12 --version`.
 
 macOS (Homebrew) — generic:
 
@@ -79,19 +97,6 @@ uv python install 3.12
 export PATH="$(dirname "$(uv python find 3.12)"):$PATH"
 ```
 
-### Door 1 — `./setup` (default)
-
-Single entrypoint. Probes Python / platform / MPS-or-CUDA / disk, creates or
-reuses `.venv`, installs, fetches the three official checkpoints, runs Sudoku
-then Maze+ARC-2 smokes. Narrated stages. Non-zero exit on fail.
-
-```bash
-git clone https://github.com/k3ss-official/hrm-gears.git
-cd hrm-gears
-python3.12 --version   # 3.12.x — recipes above
-./setup
-```
-
 ### Door 2 — techie manual
 
 Same steps, unwrapped. Use this when you already have a venv or you are
@@ -118,10 +123,10 @@ door, not the Twin-T4 harvest pack.
 docker compose run --rm setup
 ```
 
-That builds `Dockerfile` if needed, runs `./setup` unchanged, and
-removes the container. Linux `.venv` and checkpoints live in Compose
-named volumes (`hrm-gears_venv`, `hrm-gears_checkpoints`) so a host
-M4 `.venv` is not overwritten.
+Same `./setup --yes` inside `python:3.12-slim`. Host Python is not used.
+Linux `.venv` and checkpoints live in Compose named volumes
+(`hrm-gears_venv`, `hrm-gears_checkpoints`) so a host M4 `.venv` is not
+overwritten.
 
 GPU pack / harvest is **not** this image:
 [`scripts/kaggle/`](scripts/kaggle/) and [`docs/compute.md`](docs/compute.md).
@@ -206,7 +211,7 @@ Full reading: [`docs/architecture.md`](docs/architecture.md).
 ## Layout
 
 ```
-./setup                   Door 1 — probe, venv, fetch, smokes
+./setup                   Door 1 — interactive install (venv, fetch, smokes)
 Dockerfile  compose.yaml  Door 3 — CPU one-shot
 assets/hrm-gears-banner.jpg
 hrm_gears/                runtime package

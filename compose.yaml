@@ -11,7 +11,7 @@ services:
       context: .
       dockerfile: Dockerfile
     working_dir: /work
-    command: ["./setup"]
+    command: ["./setup", "--yes"]
     volumes:
       - venv:/work/.venv
       - checkpoints:/work/checkpoints

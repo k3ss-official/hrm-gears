@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
-"""Download the three official Sapient HRM checkpoints (not redistributed)."""
+"""Download official Sapient HRM checkpoints (not redistributed)."""
 
 from __future__ import annotations
 
+import argparse
 from pathlib import Path
 
 from huggingface_hub import snapshot_download
@@ -16,11 +17,22 @@ REPOS = {
 
 
 def main() -> int:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument(
+        "--only",
+        nargs="+",
+        choices=sorted(REPOS),
+        metavar="NAME",
+        help="Fetch this subset (default: all three).",
+    )
+    args = parser.parse_args()
+    selected = {name: REPOS[name] for name in args.only} if args.only else REPOS
+
     dest_root = ROOT / "checkpoints"
     dest_root.mkdir(exist_ok=True)
     named = dest_root / "sapientinc"
     named.mkdir(exist_ok=True)
-    for short, repo in REPOS.items():
+    for short, repo in selected.items():
         local = dest_root / short
         print(f"fetch {repo} -> {local}")
         snapshot_download(repo_id=repo, local_dir=str(local))

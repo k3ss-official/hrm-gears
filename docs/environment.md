@@ -11,15 +11,15 @@ We do not pretend otherwise.
 
 ## Python 3.12
 
-Doors 1 and 2 require **Python ≥ 3.12**. `./setup` probes `python3.12`
-then `python3` and exits non-zero on 3.10 / 3.11. Door 3 is
-`python:3.12-slim` and does not use the host interpreter.
+Doors 1 and 2 need **Python ≥ 3.12**. `./setup` on a TTY offers to
+install it (Homebrew / apt / uv) when the probe misses. `--yes` accepts
+that install. Door 3 is `python:3.12-slim` and does not use the host
+interpreter.
 
-Install recipes (Homebrew, miniforge, apt, uv):
-[README — Python 3.12](../README.md#python-312).
+Manual recipes: [README — Python 3.12](../README.md#python-312-manual).
 
 ```bash
-python3.12 --version   # must print 3.12.x before ./setup
+python3.12 --version   # ./setup also accepts this as already done
 ```
 
 ## Bootstrap

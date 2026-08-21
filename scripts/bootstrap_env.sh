@@ -20,6 +20,10 @@ if [[ ! -d .venv ]]; then
 fi
 # shellcheck disable=SC1091
 source .venv/bin/activate
+if ! python -m pip --version >/dev/null 2>&1; then
+  echo "pip missing in .venv — python -m ensurepip --upgrade"
+  python -m ensurepip --upgrade
+fi
 python -m pip install -U pip setuptools wheel
 python -m pip install torch
 python -m pip install -r requirements.txt
