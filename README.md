@@ -35,7 +35,7 @@ gears  = vendor models (free → frontier API)
 derailleur  = HRM driven(candidate)
 ```
 
-Repo: [`k3ss-official/hrm-gears`](https://github.com/k3ss-official/hrm-gears).
+Repo: [`anwhelan01/hrm-gears`](https://github.com/anwhelan01/hrm-gears).
 The Python package import is still `hrm_gear`.
 
 ## Install — three doors
@@ -47,7 +47,7 @@ reuses `.venv`, installs, fetches the three official checkpoints, runs Sudoku
 then Maze+ARC-2 smokes. Narrated stages. Non-zero exit on fail.
 
 ```bash
-git clone https://github.com/k3ss-official/hrm-gears.git
+git clone https://github.com/anwhelan01/hrm-gears.git
 cd hrm-gears
 ./setup
 ```
