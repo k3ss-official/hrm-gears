@@ -1,6 +1,6 @@
 # hrm-gears phases — 2026-08-26 night pack
 
-Owner: Tony. Hands tonight: this session. Repo: `anwhelan01/hrm-gears`.
+Owner: Tony. Hands tonight: this session. Repo: `k3ss-official/hrm-gears`.
 Gym Kaggle: `mrvibecoder` (discovery only). Main Kaggle: do not touch until Phase C is green.
 
 ## Done (receipts)

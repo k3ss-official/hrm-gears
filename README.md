@@ -48,7 +48,7 @@ is unattended (Door 3 / CI).
 ### Door 1 — `./setup` (default)
 
 ```bash
-git clone https://github.com/anwhelan01/hrm-gears.git
+git clone https://github.com/k3ss-official/hrm-gears.git
 cd hrm-gears
 ./setup
 ```
