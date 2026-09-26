@@ -161,7 +161,7 @@ def main() -> int:
         "kaggle_username_placeholder": username == "REPLACE_ME",
         "accelerator_required": "GPU T4 x2",
         "hardware": "2x NVIDIA Tesla T4",
-        "public_repo": "https://github.com/anwhelan01/hrm-gears",
+        "public_repo": "https://github.com/k3ss-official/hrm-gears",
     }
     (dest / "MANIFEST.json").write_text(
         json.dumps(manifest, indent=2) + "\n", encoding="utf-8"

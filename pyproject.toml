@@ -9,7 +9,7 @@ authors = [{ name = "Tony Whelan", email = "k3ss.official@gmail.com" }]
 dependencies = []
 
 [project.urls]
-Homepage = "https://github.com/anwhelan01/hrm-gears"
+Homepage = "https://github.com/k3ss-official/hrm-gears"
 Upstream = "https://github.com/sapientinc/HRM"
 Paper = "https://arxiv.org/abs/2506.21734"
 
