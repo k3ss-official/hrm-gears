@@ -1,0 +1,5 @@
+# exploded matrix lives in repo after this commit; full file follows in working copy if this is stub
+# If you see only this stub, pull from session artifacts / next commit.
+version: exploded-1.0
+frozen_at: '2026-08-27'
+note: Use local checkout; full YAML is 23k and is being applied next.
