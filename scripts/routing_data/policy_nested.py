@@ -42,7 +42,6 @@ class Model:
     vendor: str
     lane: str
     ability_floor: int
-    price_rank: int
     unit_cost: float
     yaml_rank: int
     tools: bool
@@ -75,6 +74,14 @@ def load_exploded(path: Path = MATRIX_PATH):
             claim = float(item["vendor_claim"])
             bench = float(item["bench"])
             offset = float(item["community_offset"])
+            # NOTE: alpha + (1-alpha) + beta = 1.25, not 1 -- this is not a
+            # true 3-term convex combination. bench/claim are the convex
+            # combination (their coefficients do sum to 1); offset is a
+            # separate +/-beta correction layered on top, pre-clip. See the
+            # long comment on compute_reality() in _build_exploded_matrix.py
+            # for why this is intentionally left as-is rather than
+            # renormalized (frozen formula; renormalizing would change
+            # every reality score and every derived label).
             reality = clip01(alpha * bench + (1.0 - alpha) * claim + beta * offset)
             models.append(
                 Model(
@@ -83,7 +90,6 @@ def load_exploded(path: Path = MATRIX_PATH):
                     vendor=vendor,
                     lane=item["lane"],
                     ability_floor=int(item["ability_floor"]),
-                    price_rank=int(item["price_rank"]),
                     unit_cost=unit_cost(item),
                     yaml_rank=rank,
                     tools=bool(item.get("tools", False)),
@@ -138,10 +144,17 @@ def eligible(models, tags, available, require_reality):
 
 
 def pick_in_lane(pool, lane):
+    """Tie-break exactly as frozen in docs/algorithm-phase1.md's T step:
+    cheapest unit cost, then higher reality, then YAML declaration order.
+    (An undocumented `price_rank` key used to sit between unit_cost and
+    reality here — it appeared nowhere in the frozen spec or the source
+    matrix data, so it was spec/code drift, not a real tie-break signal.
+    Removed 2026-08-27 rather than left silently deciding ties.)
+    """
     subset = [m for m in pool if m.lane == lane]
     if not subset:
         return None
-    subset.sort(key=lambda m: (m.unit_cost, m.price_rank, -m.reality, m.yaml_rank))
+    subset.sort(key=lambda m: (m.unit_cost, -m.reality, m.yaml_rank))
     return subset[0]
 
 

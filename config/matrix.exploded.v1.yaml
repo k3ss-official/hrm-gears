@@ -1,5 +1,503 @@
-# exploded matrix lives in repo after this commit; full file follows in working copy if this is stub
-# If you see only this stub, pull from session artifacts / next commit.
+# AUTO-GENERATED from docs/matrix-phase1-by-lane.md — see
+# scripts/routing_data/_build_exploded_matrix.py for provenance and
+# the reality-score verification that ran before this file was written.
+# Do not hand-edit; regenerate via that script if the source table changes.
 version: exploded-1.0
 frozen_at: '2026-08-27'
-note: Use local checkout; full YAML is 23k and is being applied next.
+note: Transcribed and reality-verified from docs/matrix-phase1-by-lane.md by scripts/routing_data/_build_exploded_matrix.py.
+  Prices are combined in+out $/M tokens from the source table (it doesn't break out the two directions
+  separately) recorded here as in_usd_per_m with out_usd_per_m omitted; unit_cost() sums both, so the
+  total is correct even though the in/out split isn't independently known. Models with '—' (no published
+  price) omit both price fields so unit_cost() falls back to its 9999 sentinel rather than being treated
+  as free.
+alpha: 0.55
+beta: 0.25
+confidence_tau: 0.62
+lane_order:
+- subscription
+- api_free
+- api_paid_non_frontier
+- api_paid_frontier
+vendors:
+  nous_portal:
+    models:
+    - id: nous-longcat-2
+      lane: subscription
+      ability_floor: 2
+      vendor_claim: 0.78
+      bench: 0.68
+      community_offset: -0.15
+      tools: true
+      vision: false
+      in_usd_per_m: 0.0
+      offset_evidence: 'Hands-on testing found LongCat-2.0 ''buggy and rough around the edges,'' losing
+        head-to-head to GLM-5.2 despite competitive benchmark scores (2026-08-27 research pass): https://aiprofitboardroom.com/blog/meituan-longcat-2-0/'
+    - id: nous-hy3
+      lane: subscription
+      ability_floor: 1
+      vendor_claim: 0.55
+      bench: 0.42
+      community_offset: 0.1
+      tools: true
+      vision: false
+      in_usd_per_m: 0.0
+    - id: nous-deepseek-v4-flash
+      lane: subscription
+      ability_floor: 2
+      vendor_claim: 0.7
+      bench: 0.62
+      community_offset: 0.15
+      tools: true
+      vision: false
+      in_usd_per_m: 0.15
+      offset_evidence: 'Independent testers reported tool-calling reliability held up better than expected
+        for its price tier (2026-08-27 research pass): https://blog.kilo.ai/p/we-tested-deepseek-v4-pro-and-flash'
+    - id: nous-nemotron-3-super
+      lane: subscription
+      ability_floor: 2
+      vendor_claim: 0.72
+      bench: 0.52
+      community_offset: 0.05
+      tools: true
+      vision: false
+      in_usd_per_m: 0.39
+    - id: nous-hermes4-405b
+      lane: subscription
+      ability_floor: 2
+      vendor_claim: 0.7
+      bench: 0.58
+      community_offset: 0.2
+      tools: true
+      vision: false
+      in_usd_per_m: 0.46
+    - id: nous-qwen38
+      lane: subscription
+      ability_floor: 2
+      vendor_claim: 0.74
+      bench: 0.66
+      community_offset: 0.05
+      tools: true
+      vision: false
+      in_usd_per_m: 2.38
+    - id: nous-glm-52
+      lane: subscription
+      ability_floor: 3
+      vendor_claim: 0.8
+      bench: 0.7
+      community_offset: 0.1
+      tools: true
+      vision: false
+      in_usd_per_m: 2.98
+      offset_evidence: 'Topped Design Arena''s blind human-preference test ~10 Elo ahead of Claude Fable
+        5, and beat Hy3/LongCat-2.0 in hands-on builds despite comparable or higher raw benchmarks (2026-08-27
+        research pass): https://www.layer3labs.io/guides/glm-5-2-review'
+    - id: nous-nemotron-3-ultra
+      lane: subscription
+      ability_floor: 3
+      vendor_claim: 0.8
+      bench: 0.46
+      community_offset: -0.25
+      tools: true
+      vision: false
+      in_usd_per_m: 3.36
+      offset_evidence: 'Independent browser-agent benchmark ranked it 11th of 11 models tested despite
+        vendor ''agent orchestration'' positioning (2026-08-27 research pass): https://www.webbrain.one/blog/nemotron3-ultra-openrouter-planner-benchmark'
+    - id: nous-gemini-31-pro
+      lane: subscription
+      ability_floor: 3
+      vendor_claim: 0.88
+      bench: 0.72
+      community_offset: 0.0
+      tools: true
+      vision: true
+      in_usd_per_m: 11.2
+    - id: nous-gpt55
+      lane: subscription
+      ability_floor: 3
+      vendor_claim: 0.92
+      bench: 0.73
+      community_offset: -0.05
+      tools: true
+      vision: true
+      in_usd_per_m: 28.0
+      offset_evidence: 'Review reports teams seeing slower apps, higher bills, and subtle regressions
+        despite stellar benchmark scores (2026-08-27 research pass): https://www.solopreneur.global/posts/gpt-5-5-real-world-performance-vs-marketing-claims-us'
+    - id: nous-fable5
+      lane: subscription
+      ability_floor: 4
+      vendor_claim: 0.98
+      bench: 0.88
+      community_offset: -0.1
+      tools: true
+      vision: true
+      in_usd_per_m: 48.0
+  opencode_go:
+    models:
+    - id: go-hy3
+      lane: subscription
+      ability_floor: 1
+      vendor_claim: 0.5
+      bench: 0.4
+      community_offset: 0.15
+      tools: true
+      vision: false
+      in_usd_per_m: 0.09
+    - id: go-glm53-flash
+      lane: subscription
+      ability_floor: 2
+      vendor_claim: 0.72
+      bench: 0.64
+      community_offset: 0.1
+      tools: true
+      vision: false
+      in_usd_per_m: 0.32
+      offset_evidence: 'Before its identity was revealed, this model (as mystery ''Ox Alpha'') became
+        the week''s most-used model on real agentic workloads, outperforming its apparent weight class
+        (2026-08-27 research pass): https://blog.kilo.ai/p/ox-alpha-was-glm-53-flash-all-along'
+    - id: go-ds-v4-flash
+      lane: subscription
+      ability_floor: 2
+      vendor_claim: 0.7
+      bench: 0.62
+      community_offset: 0.15
+      tools: true
+      vision: false
+      in_usd_per_m: 0.88
+      offset_evidence: 'Hacker News users running it in production report it performing better than the
+        pro tier and out-executing pricier models (2026-08-27 research pass): https://news.ycombinator.com/item?id=49119559'
+    - id: go-gpt56-luna
+      lane: subscription
+      ability_floor: 2
+      vendor_claim: 0.78
+      bench: 0.68
+      community_offset: 0.1
+      tools: true
+      vision: true
+      in_usd_per_m: 1.4
+    - id: go-longcat-2
+      lane: subscription
+      ability_floor: 2
+      vendor_claim: 0.78
+      bench: 0.68
+      community_offset: -0.1
+      tools: true
+      vision: false
+      in_usd_per_m: 1.5
+      offset_evidence: 'Hands-on review: ''playable, but buggy and rough around the edges,'' outperformed
+        by GLM-5.2 head-to-head despite competitive benchmarks; moderate confidence, one other outlet
+        framed adoption more favorably (2026-08-27 research pass): https://aiprofitboardroom.com/blog/meituan-longcat-2-0/'
+    - id: go-glm53
+      lane: subscription
+      ability_floor: 3
+      vendor_claim: 0.82
+      bench: 0.72
+      community_offset: 0.05
+      tools: true
+      vision: false
+      in_usd_per_m: 5.8
+    - id: go-grok-46
+      lane: subscription
+      ability_floor: 3
+      vendor_claim: 0.88
+      bench: 0.75
+      community_offset: 0.0
+      tools: true
+      vision: true
+      in_usd_per_m: 8.0
+    - id: go-qwen38-max
+      lane: subscription
+      ability_floor: 3
+      vendor_claim: 0.86
+      bench: 0.74
+      community_offset: -0.05
+      tools: true
+      vision: false
+      in_usd_per_m: 8.0
+    - id: go-kimi-k3
+      lane: subscription
+      ability_floor: 3
+      vendor_claim: 0.9
+      bench: 0.78
+      community_offset: -0.15
+      tools: true
+      vision: false
+      in_usd_per_m: 18.0
+      offset_evidence: 'Analysis shows hallucination rate climbing alongside benchmark accuracy gains;
+        practitioners want real long-session usage reports before trusting rankings (2026-08-27 research
+        pass): https://kili-technology.com/blog/kimi-k3s-benchmarks-and-hallucinations----what-that-tells-us-about-ai-evaluation'
+  openai_oauth:
+    models:
+    - id: oai-gpt54-nano
+      lane: subscription
+      ability_floor: 1
+      vendor_claim: 0.6
+      bench: 0.5
+      community_offset: 0.1
+      tools: true
+      vision: true
+      in_usd_per_m: 1.45
+    - id: oai-gpt54-mini
+      lane: subscription
+      ability_floor: 2
+      vendor_claim: 0.72
+      bench: 0.62
+      community_offset: 0.1
+      tools: true
+      vision: true
+      in_usd_per_m: 5.25
+    - id: oai-gpt56-luna
+      lane: subscription
+      ability_floor: 2
+      vendor_claim: 0.78
+      bench: 0.68
+      community_offset: 0.1
+      tools: true
+      vision: true
+      in_usd_per_m: 7.0
+    - id: oai-gpt56-terra
+      lane: subscription
+      ability_floor: 3
+      vendor_claim: 0.88
+      bench: 0.76
+      community_offset: 0.0
+      tools: true
+      vision: true
+      in_usd_per_m: 17.5
+    - id: oai-gpt56-sol
+      lane: subscription
+      ability_floor: 4
+      vendor_claim: 0.95
+      bench: 0.82
+      community_offset: 0.05
+      tools: true
+      vision: true
+      in_usd_per_m: 35.0
+    - id: oai-gpt55-pro
+      lane: subscription
+      ability_floor: 4
+      vendor_claim: 0.97
+      bench: 0.93
+      community_offset: -0.2
+      tools: true
+      vision: true
+      in_usd_per_m: 210.0
+      offset_evidence: 'Independent reviews describe it as underwhelming vs. its own marketing/benchmark
+        claims in practice -- ''lazy execution style,'' familiar failure modes (2026-08-27 research pass):
+        https://www.solopreneur.global/posts/gpt-5-5-real-world-performance-vs-marketing-claims-us'
+  openrouter:
+    models:
+    - id: or-glm52-free
+      lane: api_free
+      ability_floor: 2
+      vendor_claim: 0.8
+      bench: 0.7
+      community_offset: 0.15
+      tools: true
+      vision: false
+      in_usd_per_m: 0.0
+      offset_evidence: 'Hands-on report contrasts typical benchmark-chart hype with GLM-5.2 actually matching
+        Claude-level code quality and shipping deployment-ready output on the first try (2026-08-27 research
+        pass): https://dev.to/danielbergholz/testing-glm-52-on-opencode-im-impressed-1780'
+    - id: or-laguna-s21-free
+      lane: api_free
+      ability_floor: 2
+      vendor_claim: 0.74
+      bench: 0.64
+      community_offset: 0.1
+      tools: true
+      vision: false
+      in_usd_per_m: 0.0
+    - id: or-minimax-m3-free
+      lane: api_free
+      ability_floor: 2
+      vendor_claim: 0.72
+      bench: 0.62
+      community_offset: 0.05
+      tools: true
+      vision: true
+      in_usd_per_m: 0.0
+    - id: or-nemotron-ultra-free
+      lane: api_free
+      ability_floor: 2
+      vendor_claim: 0.8
+      bench: 0.46
+      community_offset: -0.2
+      tools: true
+      vision: false
+      in_usd_per_m: 0.0
+    - id: or-gemma4-31b-free
+      lane: api_free
+      ability_floor: 2
+      vendor_claim: 0.6
+      bench: 0.47
+      community_offset: 0.05
+      tools: true
+      vision: true
+      in_usd_per_m: 0.0
+    - id: or-free-router
+      lane: api_free
+      ability_floor: 1
+      vendor_claim: 0.5
+      bench: 0.35
+      community_offset: -0.1
+      tools: true
+      vision: true
+      in_usd_per_m: 0.0
+      offset_evidence: 'OpenRouter''s own docs position this router for learning/prototyping rather than
+        production, flagging higher latency/availability/rate-limit variance; direction matches, exact
+        magnitude not independently verified (2026-08-27 research pass): https://openrouter.ai/docs/guides/routing/routers/free-router'
+    - id: or-mid
+      lane: api_paid_non_frontier
+      ability_floor: 2
+      vendor_claim: 0.7
+      bench: 0.6
+      community_offset: 0.0
+      tools: true
+      vision: false
+    - id: or-frontier
+      lane: api_paid_frontier
+      ability_floor: 4
+      vendor_claim: 0.95
+      bench: 0.85
+      community_offset: -0.1
+      tools: true
+      vision: true
+  nvidia_api:
+    models:
+    - id: nv-super-free
+      lane: api_free
+      ability_floor: 2
+      vendor_claim: 0.72
+      bench: 0.52
+      community_offset: 0.0
+      tools: true
+      vision: false
+      in_usd_per_m: 0.0
+    - id: nv-nano-omni-free
+      lane: api_free
+      ability_floor: 2
+      vendor_claim: 0.7
+      bench: 0.44
+      community_offset: 0.1
+      tools: true
+      vision: true
+      in_usd_per_m: 0.0
+    - id: nv-ultra-free
+      lane: api_free
+      ability_floor: 2
+      vendor_claim: 0.8
+      bench: 0.46
+      community_offset: -0.2
+      tools: true
+      vision: false
+      in_usd_per_m: 0.0
+    - id: nv-lightning-free
+      lane: api_free
+      ability_floor: 2
+      vendor_claim: 0.75
+      bench: 0.4
+      community_offset: -0.2
+      tools: true
+      vision: false
+      in_usd_per_m: 0.0
+      offset_evidence: 'Hacker News hands-on coding test found it ''terrible,'' going off the rails vs.
+        dense alternatives despite its speed advantage (2026-08-27 research pass): https://news.ycombinator.com/item?id=49263340'
+    - id: nv-lightning-paid
+      lane: api_paid_non_frontier
+      ability_floor: 2
+      vendor_claim: 0.75
+      bench: 0.4
+      community_offset: -0.15
+      tools: true
+      vision: false
+      in_usd_per_m: 0.28
+      offset_evidence: 'Same underlying model as the free-tier SKU; under-delivery evidence came from
+        a general deployment rather than the rate-limited free endpoint specifically, so it reasonably
+        extends here, though no paid-tier-specific report was found (2026-08-27 research pass): https://news.ycombinator.com/item?id=49263340'
+    - id: nv-ultra-paid
+      lane: api_paid_non_frontier
+      ability_floor: 3
+      vendor_claim: 0.8
+      bench: 0.46
+      community_offset: -0.25
+      tools: true
+      vision: false
+      in_usd_per_m: 4.2
+  opencode_zen:
+    models:
+    - id: zen-glm47-free
+      lane: api_free
+      ability_floor: 1
+      vendor_claim: 0.5
+      bench: 0.4
+      community_offset: 0.0
+      tools: true
+      vision: false
+      in_usd_per_m: 0.0
+    - id: zen-gpt56-luna
+      lane: api_paid_non_frontier
+      ability_floor: 2
+      vendor_claim: 0.78
+      bench: 0.68
+      community_offset: 0.1
+      tools: true
+      vision: true
+      in_usd_per_m: 1.4
+    - id: zen-claude-sonnet-45
+      lane: api_paid_non_frontier
+      ability_floor: 3
+      vendor_claim: 0.8
+      bench: 0.7
+      community_offset: 0.05
+      tools: true
+      vision: true
+    - id: zen-kimi-k2
+      lane: api_paid_non_frontier
+      ability_floor: 2
+      vendor_claim: 0.7
+      bench: 0.62
+      community_offset: 0.05
+      tools: true
+      vision: false
+      offset_evidence: 'Hands-on review found it matched/exceeded its own vendor SWE-bench claim in real
+        coding tasks -- 93% success across 15 hands-on tasks vs. 69.2% vendor-reported benchmark (2026-08-27
+        research pass): https://medium.com/@leucopsis/kimi-k2-0905-review-cf12b026a7a4'
+    - id: zen-big-pickle
+      lane: api_paid_non_frontier
+      ability_floor: 2
+      vendor_claim: 0.55
+      bench: 0.48
+      community_offset: 0.1
+      tools: true
+      vision: false
+    - id: zen-gpt56-sol
+      lane: api_paid_frontier
+      ability_floor: 4
+      vendor_claim: 0.95
+      bench: 0.82
+      community_offset: 0.05
+      tools: true
+      vision: true
+      in_usd_per_m: 24.0
+      offset_evidence: 'Hands-on test building five real apps scored 2 perfect + 1 solid of 5; corroborated
+        by a second independent review calling it one of OpenAI''s largest practical upgrades (2026-08-27
+        research pass): https://promptslove.com/blog/my-honest-gpt-5-6-sol-review/'
+    - id: zen-fable5
+      lane: api_paid_frontier
+      ability_floor: 4
+      vendor_claim: 0.98
+      bench: 0.88
+      community_offset: -0.1
+      tools: true
+      vision: true
+      in_usd_per_m: 60.0
+    - id: zen-opus5
+      lane: api_paid_frontier
+      ability_floor: 4
+      vendor_claim: 0.99
+      bench: 0.9
+      community_offset: -0.05
+      tools: true
+      vision: true
+      offset_evidence: 'Multiple developers report reverting to Opus 4.8, calling Opus 5 ''nerfed, not
+        upgraded'' despite benchmark scores comparable to GPT-5.6 Sol (2026-08-27 research pass): https://www.mindstudio.ai/blog/claude-opus-5-mixed-reception'
